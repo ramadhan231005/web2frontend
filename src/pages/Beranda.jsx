@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
 import foodImg from '../assets/Food.jpg'; // Menggunakan banner figma kamu
 import rendangImg from '../assets/rendang.jpg'; // Menggunakan gambar rendang asli
@@ -45,9 +45,13 @@ function Beranda() {
         </div>
         
         {/* Menu Tengah */}
-        <div className="hidden md:flex items-center gap-8 font-sans text-sm font-medium">
-          <a href="#" className="text-[#8A1C14] border-b-2 border-[#8A1C14] pb-1 font-bold">Beranda</a>
-          <a href="#" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Eksplorasi</a>
+<div className="hidden md:flex items-center gap-8 font-sans text-sm font-medium">
+  <Link to="/beranda" className="text-[#8A1C14] border-b-2 border-[#8A1C14] pb-1 font-bold">Beranda</Link>
+  
+  {/* 👇 SEKARANG TOMBOL INI SUDAH AKTIF MENINGGALKAN BERANDA */}
+  <Link to="/eksplorasi" className="text-[#736461] hover:text-[#8A1C14] transition-colors">
+    Eksplorasi
+  </Link>
           <a href="#" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Favorit</a>
           <a href="#" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Profil</a>
         </div>
