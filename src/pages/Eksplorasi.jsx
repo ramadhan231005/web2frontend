@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
 
@@ -18,7 +17,8 @@ function Eksplorasi() {
       {/* 1. NAVBAR */}
       <nav className="bg-[#FDF8F5] px-6 md:px-12 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <Link to="/">
+          {/* Diubah ke /beranda agar tidak kembali ke halaman login */}
+          <Link to="/beranda">
             <img src={logoImg} alt="Logo Khas Nusantara" className="h-8 w-auto object-contain" />
           </Link>
         </div>
@@ -62,7 +62,10 @@ function Eksplorasi() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           
           {/* Kartu Besar Kiri: Bali */}
-          <div className="relative md:col-span-2 h-[350px] rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+          <Link 
+            to="/resep/ayam-betutu" 
+            className="relative md:col-span-2 h-[350px] rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md block"
+          >
             <img 
               src={baliImg} 
               alt="Bali" 
@@ -77,18 +80,21 @@ function Eksplorasi() {
                   <h2 className="text-2xl font-bold font-serif">Bali</h2>
                   <p className="text-[10px] text-white/80 font-sans">142 Resep Otentik</p>
                 </div>
-                <button className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#8A1C14] transition-all">
+                <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#8A1C14] transition-all">
                   ➔
-                </button>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Kolom Kanan Bento: Dua Kartu Vertikal */}
           <div className="flex flex-col gap-5 h-[350px]">
             
-            {/* Jawa Tengah */}
-            <div className="relative flex-1 rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+            {/* Jawa Tengah -> Diarahkan langsung ke Nasi Liwet */}
+            <Link 
+              to="/resep/nasi-liwet" 
+              className="relative flex-1 rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md block"
+            >
               <img 
                 src={jatengImg} 
                 alt="Jawa Tengah" 
@@ -96,12 +102,15 @@ function Eksplorasi() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5 z-10">
                 <h2 className="text-lg font-bold text-white font-serif">Jawa Tengah</h2>
-                <p className="text-[10px] text-white/70 font-sans">Pusat Rempah Jawa</p>
+                <p className="text-[10px] text-white/70 font-sans">Pusat Rempah Jawa (Nasi Liwet)</p>
               </div>
-            </div>
+            </Link>
 
             {/* Sumatera Barat */}
-            <div className="relative flex-1 rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+            <Link 
+              to="/resep/rendang" 
+              className="relative flex-1 rounded-2xl overflow-hidden group shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md block"
+            >
               <img 
                 src={sumbarImg} 
                 alt="Sumatera Barat" 
@@ -111,7 +120,7 @@ function Eksplorasi() {
                 <h2 className="text-lg font-bold text-white font-serif">Sumatera Barat</h2>
                 <p className="text-[10px] text-white/70 font-sans">Ranah Rendang</p>
               </div>
-            </div>
+            </Link>
           </div>
 
         </div>
@@ -121,8 +130,11 @@ function Eksplorasi() {
       <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           
-          {/* DI Yogyakarta (Gambar Kiri, Teks Kanan) */}
-          <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex h-[180px] group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+          {/* DI Yogyakarta */}
+          <Link 
+            to="/resep/gudeg" 
+            className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex h-[180px] group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+          >
             <div className="w-[35%] relative h-full overflow-hidden">
               <img 
                 src={diyImg} 
@@ -143,10 +155,13 @@ function Eksplorasi() {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* Sulawesi Selatan (Teks Kiri, Gambar Kanan) */}
-          <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex h-[180px] group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+          {/* Sulawesi Selatan */}
+          <Link 
+            to="/resep/coto-makassar" 
+            className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex h-[180px] group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+          >
             <div className="w-[65%] p-5 flex flex-col justify-between order-2 lg:order-1">
               <div>
                 <h3 className="text-lg font-bold text-[#8A1C14] font-serif mb-1 transition-colors group-hover:text-[#721610]">Sulawesi Selatan</h3>
@@ -167,7 +182,7 @@ function Eksplorasi() {
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" 
               />
             </div>
-          </div>
+          </Link>
 
         </div>
       </div>

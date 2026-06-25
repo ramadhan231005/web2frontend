@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Daftar from './pages/Daftar';
 import Beranda from './pages/Beranda';
 import Eksplorasi from './pages/Eksplorasi';
+import DetailResep from './pages/DetailResep'; // 👈 1. Tambahkan import ini
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
         <Route path="/beranda" element={<Beranda />} />
         
         <Route path="/eksplorasi" element={<Eksplorasi />} />
+        
+        {/* 👈 2. Tambahkan rute dinamis untuk detail resep di sini */}
+        <Route path="/resep/:id" element={<DetailResep />} />
+
         <Route path="/daftar" element={<Daftar />} />
       </Routes>
     </Router>
