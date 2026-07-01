@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
-import foodImg from '../assets/Food.jpg'; // Menggunakan banner figma kamu
-import rendangImg from '../assets/rendang.jpg'; // Menggunakan gambar rendang asli
-import sotobetawiImg from '../assets/sotobetawi.jpg'; // Menggunakan gambar soto betawi asli
-import sateImg from '../assets/sate.jpg'; // Menggunakan gambar sate lilit asli
+import foodImg from '../assets/Food.jpg'; 
+import rendangImg from '../assets/rendang.jpg'; 
+import sotobetawiImg from '../assets/sotobetawi.jpg'; 
+import sateImg from '../assets/sate.jpg'; 
 import { FiSearch, FiHeart, FiClock, FiMapPin } from 'react-icons/fi';
 
 function Beranda() {
-  // Data resep simulasi agar persis seperti di desain Figma kamu
   const hidanganPopuler = [
     {
       id: 1,
@@ -15,7 +14,7 @@ function Beranda() {
       daerah: 'Sumatera Barat',
       deskripsi: 'Hidangan daging kaya rasa yang dimasak perlahan dalam santan dan campuran rempah tradisional yang kompleks.',
       durasi: '4 Jam',
-      gambar: rendangImg // Kamu bisa mengganti dengan gambar spesifik nanti
+      gambar: rendangImg
     },
     {
       id: 2,
@@ -45,15 +44,13 @@ function Beranda() {
         </div>
         
         {/* Menu Tengah */}
-<div className="hidden md:flex items-center gap-8 font-sans text-sm font-medium">
-  <Link to="/beranda" className="text-[#8A1C14] border-b-2 border-[#8A1C14] pb-1 font-bold">Beranda</Link>
-  
-  {/* 👇 SEKARANG TOMBOL INI SUDAH AKTIF MENINGGALKAN BERANDA */}
-  <Link to="/eksplorasi" className="text-[#736461] hover:text-[#8A1C14] transition-colors">
-    Eksplorasi
-  </Link>
-          <a href="#" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Favorit</a>
-          <a href="#" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Profil</a>
+        <div className="hidden md:flex items-center gap-8 font-sans text-sm font-medium">
+          <Link to="/beranda" className="text-[#8A1C14] border-b-2 border-[#8A1C14] pb-1 font-bold">Beranda</Link>
+          <Link to="/eksplorasi" className="text-[#736461] hover:text-[#8A1C14] transition-colors">
+            Eksplorasi
+          </Link>
+          <Link to="/favorit" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Favorit</Link>
+          <Link to="/profil" className="text-[#736461] hover:text-[#8A1C14] transition-colors">Profil</Link>
         </div>
 
         {/* Akun Kanan */}
@@ -66,13 +63,11 @@ function Beranda() {
         
         {/* 2. HERO SECTION */}
         <div className="relative h-[380px] rounded-[2rem] overflow-hidden shadow-lg">
-          {/* Gambar Latar Belakang */}
           <img 
             src={foodImg} 
             alt="Temukan Cita Rasa Warisan" 
             className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Overlay Gelap */}
           <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center p-6">
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3 font-serif">
               Temukan Cita Rasa Warisan
@@ -81,7 +76,6 @@ function Beranda() {
               Jelajahi resep otentik yang diturunkan dari generasi ke generasi di seluruh nusantara.
             </p>
 
-            {/* Kotak Pencarian Bulat */}
             <div className="bg-white p-2 rounded-full shadow-xl flex items-center max-w-xl w-full">
               <span className="pl-4 text-gray-400">
                 <FiSearch size={20} />
@@ -114,50 +108,61 @@ function Beranda() {
             </a>
           </div>
 
-          {/* Grid Grid Kartu Resep */}
+          {/* Grid Kartu Resep */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {hidanganPopuler.map((item) => (
-              <div key={item.id} className="bg-white rounded-3xl shadow-sm border border-neutral-100 overflow-hidden group hover:shadow-md transition-shadow duration-300">
-                
-                {/* Bagian Atas Gambar + Badge Daerah */}
-                <div className="relative h-48 bg-gray-100 overflow-hidden">
-                  <img 
-                    src={item.gambar} 
-                    alt={item.nama} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Badge Lokasi */}
-                  <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 tracking-wide uppercase">
-                    <FiMapPin size={12} className="text-orange-400" />
-                    {item.daerah}
-                  </div>
-                </div>
+            {hidanganPopuler.map((item) => {
+              const resepSlug = item.nama.toLowerCase().replace(/\s+/g, '-');
 
-                {/* Konten Kartu */}
-                <div className="p-5 flex flex-col justify-between min-h-[180px]">
-                  <div>
-                    <h3 className="text-lg font-bold text-[#2C1B18] font-serif mb-2">
-                      {item.nama}
-                    </h3>
-                    <p className="text-xs text-[#736461] font-sans leading-relaxed line-clamp-3">
-                      {item.deskripsi}
-                    </p>
-                  </div>
-
-                  {/* Footer Kartu */}
-                  <div className="flex justify-between items-center pt-4 mt-2 border-t border-neutral-50 text-neutral-400">
-                    <div className="flex items-center gap-1.5 text-xs font-sans text-[#736461]">
-                      <FiClock size={14} className="text-neutral-400" />
-                      {item.durasi}
+              return (
+                <Link 
+                  to={`/resep/${resepSlug}`}
+                  key={item.id} 
+                  className="bg-white rounded-3xl shadow-sm border border-neutral-100 overflow-hidden group hover:shadow-md transition-shadow duration-300 block cursor-pointer"
+                >
+                  {/* Bagian Atas Gambar + Badge Daerah */}
+                  <div className="relative h-48 bg-gray-100 overflow-hidden">
+                    <img 
+                      src={item.gambar} 
+                      alt={item.nama} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 tracking-wide uppercase">
+                      <FiMapPin size={12} className="text-orange-400" />
+                      {item.daerah}
                     </div>
-                    <button className="text-neutral-300 hover:text-red-500 transition-colors">
-                      <FiHeart size={18} />
-                    </button>
                   </div>
-                </div>
 
-              </div>
-            ))}
+                  {/* Konten Kartu */}
+                  <div className="p-5 flex flex-col justify-between min-h-[180px]">
+                    <div>
+                      <h3 className="text-lg font-bold text-[#2C1B18] font-serif mb-2 group-hover:text-[#8A1C14] transition-colors">
+                        {item.nama}
+                      </h3>
+                      <p className="text-xs text-[#736461] font-sans leading-relaxed line-clamp-3">
+                        {item.deskripsi}
+                      </p>
+                    </div>
+
+                    {/* Footer Kartu */}
+                    <div className="flex justify-between items-center pt-4 mt-2 border-t border-neutral-50 text-neutral-400">
+                      <div className="flex items-center gap-1.5 text-xs font-sans text-[#736461]">
+                        <FiClock size={14} className="text-neutral-400" />
+                        {item.durasi}
+                      </div>
+                      <button 
+                        className="text-neutral-300 hover:text-red-500 transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault(); 
+                          console.log(`Disukai: ${item.nama}`);
+                        }}
+                      >
+                        <FiHeart size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
 
