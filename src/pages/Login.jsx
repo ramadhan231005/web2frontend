@@ -1,29 +1,46 @@
+import { useState } from 'react'; // 👈 1. Tambahkan import useState
 import { Link, useNavigate } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
 import foodImg from '../assets/Food.jpg';
 
-// 1. Tambahkan import untuk Google Login & Icon
+// Tambahkan import untuk Google Login & Icon
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc'; 
 
 function Login() {
   const navigate = useNavigate();
 
-  // 2. Handler Google Login (Arahkan ke /beranda)
+  // 👈 2. Buat state untuk menyimpan inputan user
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Handler Google Login
   const loginDenganGoogle = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log('Login Berhasil, Token:', tokenResponse);
-      navigate('/beranda'); // 👈 Diubah ke /beranda
+      // Umumnya login Google diasumsikan sebagai user biasa
+      navigate('/beranda'); 
     },
     onError: () => {
       alert('Login Gagal, silakan coba lagi.');
     },
   });
 
-  // 3. Handler Form Email biasa (Arahkan ke /beranda)
+  // 👈 3. Handler Form Email biasa dengan Pengecekan Peran (Satu Pintu)
   const handleEmailLogin = (e) => {
     e.preventDefault();
-    navigate('/beranda'); // 👈 Diubah ke /beranda
+    
+    // SIMULASI PENGECEKAN ROLE
+    if (email === 'admin@khasnusantara.com' && password === 'admin123') {
+      // Jika email dan password adalah milik ADMIN
+      alert('Selamat datang kembali, Admin!');
+      navigate('/admin/dashboard'); 
+    } else if (email !== '' && password !== '') {
+      // Jika email dan password terisi (dianggap sebagai USER BIASA)
+      navigate('/beranda'); 
+    } else {
+      alert('Mohon isi email dan kata sandi terlebih dahulu.');
+    }
   };
 
   return (
@@ -40,12 +57,28 @@ function Login() {
             <form className="space-y-5" onSubmit={handleEmailLogin}>
               <div>
                 <label className="block text-xs font-semibold text-[#2C1B18] uppercase tracking-wider mb-2">Alamat Email</label>
-                <input type="email" required placeholder="anda@contoh.com" className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#8A1C14]" />
+                {/* 👈 4. Tambahkan value dan onChange pada input email */}
+                <input 
+                  type="email" 
+                  required 
+                  placeholder="anda@contoh.com" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#8A1C14]" 
+                />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#2C1B18] uppercase tracking-wider mb-2">Kata Sandi</label>
-                <input type="password" required placeholder="********" className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#8A1C14]" />
+                {/* 👈 5. Tambahkan value dan onChange pada input password */}
+                <input 
+                  type="password" 
+                  required 
+                  placeholder="********" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#8A1C14]" 
+                />
               </div>
 
               <button type="submit" className="w-full py-3 bg-[#8A1C14] text-white font-semibold rounded-xl shadow-lg hover:bg-[#721610] transition-colors text-sm mt-4">
